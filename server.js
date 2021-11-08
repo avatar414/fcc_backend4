@@ -84,6 +84,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/users', async (req, res) => {
+  console.log("post /api/users req.body= ",req.body);
   const username = req.body.username;
 
   try {
@@ -98,6 +99,7 @@ app.post('/api/users', async (req, res) => {
 });
 
 app.get('/api/users', async (req, res) => {
+  console.log("/api/users get");
   try {
     const users = await User.find({}, '_id username');
     res.status(201).send(users);
@@ -109,9 +111,8 @@ app.get('/api/users', async (req, res) => {
 });
 
 app.post('/api/users/:_id/exercises', async (req, res) => {
-  // console.log(req.body);
-  // console.log(req.params)
-
+  console.log("post /api/users/:_id/exercises req.body= ",req.body);
+  console.log("post /api/users/:_id/exercises req.params= ",req.params);
   try {
 
     const user = await User.findById({ _id: req.params._id }, 'username',)
@@ -134,6 +135,8 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
 });
 
 app.get('/api/users/:_id/logs', async (req, res) => {
+  console.log("post /api/users/:_id/logs req.body= ",req.body);
+  console.log("post /api/users/:_id/logs req.params= ",req.params);
   try {
     const user = await User.findById({ _id: req.params._id }, 'username',)
     if (!user)
