@@ -115,10 +115,11 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   console.log("post /api/users/:_id/exercises req.params= ",req.params);
   try {
 
-    const user = await User.findById({ _id: req.params._id }, 'username',)
-    if (!user)
+    const usr = await User.findById({ _id: req.params._id }, 'username',)
+    if (!usr)
       return res.status(404).send({ error: "Invalid Username" })
-    const uname = user.username;
+    const uname = usr.username;
+    const uid= req.params._id;
     const activity = await Activity.create(
       {
         username: uname,
@@ -127,7 +128,13 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
         duration: req.body.duration,
         date: Date.parse(req.body.date)
       });
-    res.status(201).send(activity);
+    res.status(201).send({
+      _id : uid,
+      username: uname,
+      description: activity.description,
+      duration: activity.duration,
+      date: activity.date.toString()
+    });
   }
   catch (e) {
     res.status(400).send(e);
