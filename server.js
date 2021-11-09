@@ -120,20 +120,21 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
       return res.status(404).send({ error: "Invalid Username" })
     const uname = usr.username;
     const uid= req.params._id;
+    const theDate= new Date(Date.parse(req.body.date));
     const activity = await Activity.create(
       {
         username: uname,
         assocId: req.params._id,
         description: req.body.description,
         duration: req.body.duration,
-        date: Date.parse(req.body.date)
+        date: theDate.toDateString()
       });
     res.status(201).send({
       _id : uid,
       username: uname,
       description: activity.description,
       duration: activity.duration,
-      date: activity.date.toString()
+      date: theDate.toDateString()
     });
   }
   catch (e) {
