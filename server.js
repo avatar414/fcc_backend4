@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate(value) {
-      if (!validator.isAlphanumeric(value)) {
+      if (!validator.isAscii(value)) {
         throw new Error('username should contain only A-Z,a-z or 0-9');
       }
     }
