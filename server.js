@@ -39,20 +39,15 @@ const activitySchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now,
-    validate(value) {
-      if (isNaN(Date.parse(value))) {
-        throw new Error('Date format is invalid');
-      }
-    }
+    default: () => Date.now()
   },
 
   duration: {
-    type: String,
+    type: Number,
     required: true,
     validate(value) {
-      if (!validator.isInt(value)) {
-        throw new Error('duration must be a whole number of minutes');
+      if (!(value > 0)) {
+        throw new Error('duration must be a whole number of minutes > 0');
       }
     }
   },
@@ -79,30 +74,27 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 
 app.get('/', (req, res) => {
-
   res.sendFile(__dirname + '/views/index.html')
 });
 
 app.post('/api/users', async (req, res) => {
-  console.log("post /api/users req.body= ",req.body);
+  console.log("post /api/users req.body= ", req.body);
   const username = req.body.username;
 
   try {
     const user = await User.create({ username: username });
-    res.status(201).send({ "_id": user._id, "username": user.username });
+    res.status(200).send({ "_id": user._id, "username": user.username });
   }
   catch (e) {
     res.status(400).send(e);
   }
-
-
 });
 
 app.get('/api/users', async (req, res) => {
   console.log("/api/users get");
   try {
     const users = await User.find({}, '_id username');
-    res.status(201).send(users);
+    res.status(200).send(users);
   }
   catch (e) {
     res.status(400).send(e);
@@ -111,30 +103,40 @@ app.get('/api/users', async (req, res) => {
 });
 
 app.post('/api/users/:_id/exercises', async (req, res) => {
-  console.log("post /api/users/:_id/exercises req.body= ",req.body);
-  console.log("post /api/users/:_id/exercises req.params= ",req.params);
+  console.log("post /api/users/:_id/exercises req.body= ", req.body);
+  console.log("post /api/users/:_id/exercises req.params= ", req.params);
   try {
 
     const usr = await User.findById({ _id: req.params._id }, 'username',)
     if (!usr)
       return res.status(404).send({ error: "Invalid Username" })
     const uname = usr.username;
-    const uid= req.params._id;
-    const theDate= new Date(Date.parse(req.body.date));
+    const uid = req.params._id;
+
+    console.log("Req.body.date: ", req.body.date);
+    if (req.body.date === "") {
+      theDate = new Date(Date.now());
+      console.log(theDate)
+    } else {
+      console.log("false");
+      theDate = new Date(Date.parse(req.body.date));
+    }
+
+    //const theDate = new Date(Date.now());   
     const activity = await Activity.create(
       {
         username: uname,
         assocId: req.params._id,
         description: req.body.description,
         duration: req.body.duration,
-        date: theDate.toDateString()
+        date: theDate
       });
-    res.status(201).send({
-      _id : uid,
+    res.status(200).send({
+      _id: uid,
       username: uname,
       description: activity.description,
       duration: activity.duration,
-      date: theDate.toDateString()
+      date: activity.date.toDateString()
     });
   }
   catch (e) {
@@ -143,22 +145,28 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
 });
 
 app.get('/api/users/:_id/logs', async (req, res) => {
-  console.log("post /api/users/:_id/logs req.body= ",req.body);
-  console.log("post /api/users/:_id/logs req.params= ",req.params);
+  console.log("post /api/users/:_id/logs req.body= ", req.body);
+  console.log("post /api/users/:_id/logs req.params= ", req.params);
   try {
     const user = await User.findById({ _id: req.params._id }, 'username',)
     if (!user)
       return res.status(404).send({ error: "Invalid User" })
     const uname = user.username;
-    const uid= req.params._id;
-    const activities= await Activity.find({assocId : uid},'description, duration, date')
-    
-    //    await user.save();
+    const uid = req.params._id;
+    const activities = await Activity.find({ assocId: uid }, 'description duration date')
+    factivities= []
+    activities.forEach((element) => {factivities.push({
+      _id : element._id,
+      duration : element.duration,
+      description : element.description,
+      date : element.date.toDateString()
+    })})
     res.status(201).send({
-      username : uname,
-      count : activities.length,
-      _id : uid,
-      log: activities,
+      username: uname,
+      count: activities.length,
+      _id: uid,
+      log: factivities
+      
     });
   }
   catch (e) {
