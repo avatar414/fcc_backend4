@@ -143,7 +143,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     res.status(400).send(e);
   }
 });
-
+// 61895d112b9b7fa461177a71
 app.get('/api/users/:_id/logs', async (req, res) => {
   console.log("post /api/users/:_id/logs req.body= ", req.body);
   console.log("post /api/users/:_id/logs req.params= ", req.params);
@@ -156,7 +156,6 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     const activities = await Activity.find({ assocId: uid }, 'description duration date')
     factivities= []
     activities.forEach((element) => {factivities.push({
-      _id : element._id,
       duration : element.duration,
       description : element.description,
       date : element.date.toDateString()
