@@ -66,6 +66,7 @@ const activitySchema = new mongoose.Schema({
 const User = mongoose.model('user', userSchema);
 const Activity = mongoose.model('activity', activitySchema);
 
+const MAX_QUERY_RECS = 10000;
 
 app.use(cors())
 app.use(express.static('public'))
@@ -116,10 +117,11 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     console.log("Req.body.date: ", req.body.date);
     if (req.body.date === "") {
       theDate = new Date(Date.now());
-      console.log(theDate)
+      console.log("Default Date: ",theDate)
     } else {
-      console.log("false");
-      theDate = new Date(Date.parse(req.body.date));
+      
+      theDate = new Date(Date.parse(req.body.date) + 43200);
+      console.log("Inputted Date:",theDate)
     }
 
     //const theDate = new Date(Date.now());   
@@ -143,6 +145,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     res.status(400).send(e);
   }
 });
+
 // 61895d112b9b7fa461177a71
 app.get('/api/users/:_id/logs', async (req, res) => {
   console.log("post /api/users/:_id/logs req.body= ", req.body);
@@ -151,31 +154,52 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     const user = await User.findById({ _id: req.params._id }, 'username',)
     if (!user)
       return res.status(404).send({ error: "Invalid User" })
+    
     const uname = user.username;
     const uid = req.params._id;
-    const activities = await Activity.find({ assocId: uid }, 'description duration date')
-    factivities= []
-    activities.forEach((element) => {factivities.push({
-      duration : element.duration,
-      description : element.description,
-      date : element.date.toDateString()
-    })})
-    res.status(201).send({
+//    const from= req.query.from;
+//    const to= req.query.to;
+    const from= req.query.from? new Date(Date.parse(req.query.from)) : new Date(0);
+    const to= req.query.to? new Date(Date.parse(req.query.to)) : new Date();
+    const limit= (typeof(req.query.limit) != 'undefined')? Number(req.query.limit) :  MAX_QUERY_RECS;
+    console.log ("from: ",from,"to: ",to,"limit: ",limit)
+    if((from === NaN) || (to === NaN))
+      return res.status(400).send({ error: "Invalid Date Format" })
+
+    const activities = await Activity.find({ 
+      assocId: uid,
+      date: {$gte: from, $lte: to}
+    }, 'description duration date')
+    .limit(limit);
+
+    // This little kludgey bit is here to give me access to manipulate the return values
+    // and order to blindly guess at ambiguous unit tests.
+    
+    factivities = []
+    activities.forEach((element) => {
+      factivities.push({
+        description: element.description,
+        duration: element.duration,
+        date: element.date.toDateString()
+      })
+    })
+    //------------------------------------
+    res.status(200).send({
+      _id: uid,
       username: uname,
       count: activities.length,
-      _id: uid,
+      // for debugging
+        // from: from.toDateString(),
+        // to: to.toDateString(),
+        // limit: limit,
+      // end for debugging
       log: factivities
-      
     });
   }
   catch (e) {
     res.status(400).send(e);
   }
 });
-
-
-
-
 
 
 const listener = app.listen(process.env.PORT || 3000, () => {
