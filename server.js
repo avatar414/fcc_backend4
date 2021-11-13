@@ -118,8 +118,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     if (req.body.date === "") {
       theDate = new Date(Date.now());
       console.log("Default Date: ",theDate)
-    } else {
-      
+    } else {      
       theDate = new Date(Date.parse(req.body.date) + 43200000);
       console.log("Inputted Date:",theDate)
     }
@@ -170,8 +169,7 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     const to= req.query.to? new Date(Date.parse(req.query.to) + 43200001) : new Date();
     const limit= (typeof(req.query.limit) != 'undefined')? Number(req.query.limit) :  MAX_QUERY_RECS;
     console.log ("from: ",from,"to: ",to,"limit: ",limit)
-    if((from === NaN) || (to === NaN))
-      return res.status(400).send({ error: "Invalid Date Format" })
+   
 
     const activities = await Activity.find({ 
       assocId: uid,
@@ -220,7 +218,6 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     res.status(400).send(e);
   }
 });
-
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log('Your app is listening on port ' + listener.address().port)
