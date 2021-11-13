@@ -1,88 +1,88 @@
-Your app is listening on port 3000
-post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367855958' }
-post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367855963' }
+node v12.16.1
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367942681' }
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367942685' }
 /api/users get
 /api/users get
 /api/users get
-post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367855967' }
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367942690' }
 post /api/users/:_id/exercises req.body=  [Object: null prototype] {
   description: 'test',
   duration: '60',
   date: '1990-01-01'
 }
-post /api/users/:_id/exercises req.params=  { _id: '618f5dbce0f85def6f33a08d' }
+post /api/users/:_id/exercises req.params=  { _id: '618f7f9d635c83bd6fecc4eb' }
 Req.body.date:  1990-01-01
 Inputted Date: 1990-01-01T12:00:00.000Z
 Returning:  {
-  _id: '618f5dbce0f85def6f33a08d',
-  username: 'fcc_test_16367855967',
+  _id: '618f7f9d635c83bd6fecc4eb',
+  username: 'fcc_test_16367942690',
   description: 'test',
   duration: 60,
   date: 'Mon Jan 01 1990'
 }
-post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367855969' }
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367942693' }
 post /api/users/:_id/exercises req.body=  [Object: null prototype] {
   description: 'test',
   duration: '60',
   date: '1990-01-01'
 }
-post /api/users/:_id/exercises req.params=  { _id: '618f5dbde0f85def6f33a092' }
+post /api/users/:_id/exercises req.params=  { _id: '618f7f9d635c83bd6fecc4f0' }
 Req.body.date:  1990-01-01
 Inputted Date: 1990-01-01T12:00:00.000Z
 Returning:  {
-  _id: '618f5dbde0f85def6f33a092',
-  username: 'fcc_test_16367855969',
+  _id: '618f7f9d635c83bd6fecc4f0',
+  username: 'fcc_test_16367942693',
   description: 'test',
   duration: 60,
   date: 'Mon Jan 01 1990'
 }
-post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367855972' }
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367942695' }
 post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
-post /api/users/:_id/exercises req.params=  { _id: '618f5dbde0f85def6f33a097' }
+post /api/users/:_id/exercises req.params=  { _id: '618f7f9d635c83bd6fecc4f5' }
 Req.body.date:  undefined
 Inputted Date: Invalid Date
-post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367855974' }
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367942698' }
 post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
-post /api/users/:_id/exercises req.params=  { _id: '618f5dbde0f85def6f33a09b' }
+post /api/users/:_id/exercises req.params=  { _id: '618f7f9d635c83bd6fecc4f9' }
 Req.body.date:  undefined
 Inputted Date: Invalid Date
-post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367855977' }
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367942701' }
 post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
-post /api/users/:_id/exercises req.params=  { _id: '618f5dbde0f85def6f33a09f' }
+post /api/users/:_id/exercises req.params=  { _id: '618f7f9e635c83bd6fecc4fd' }
 Req.body.date:  undefined
 Inputted Date: Invalid Date
-post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367855979' }
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367942703' }
 post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
-post /api/users/:_id/exercises req.params=  { _id: '618f5dbde0f85def6f33a0a3' }
+post /api/users/:_id/exercises req.params=  { _id: '618f7f9e635c83bd6fecc501' }
 Req.body.date:  undefined
 Inputted Date: Invalid Date
-post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367855981' }
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367942706' }
 post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
-post /api/users/:_id/exercises req.params=  { _id: '618f5dbee0f85def6f33a0a7' }
+post /api/users/:_id/exercises req.params=  { _id: '618f7f9e635c83bd6fecc505' }
 Req.body.date:  undefined
 Inputted Date: Invalid Date
-post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367855984' }
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367942708' }
 post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
-post /api/users/:_id/exercises req.params=  { _id: '618f5dbee0f85def6f33a0ab' }
+post /api/users/:_id/exercises req.params=  { _id: '618f7f9e635c83bd6fecc509' }
 Req.body.date:  undefined
 Inputted Date: Invalid Date
-post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367855986' }
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367942710' }
 post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
-post /api/users/:_id/exercises req.params=  { _id: '618f5dbee0f85def6f33a0af' }
+post /api/users/:_id/exercises req.params=  { _id: '618f7f9f635c83bd6fecc50d' }
 Req.body.date:  undefined
 Inputted Date: Invalid Date
-post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367855988' }
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367942714' }
 post /api/users/:_id/exercises req.body=  [Object: null prototype] {
   description: 'test',
   duration: '60',
   date: '1990-01-01'
 }
-post /api/users/:_id/exercises req.params=  { _id: '618f5dbee0f85def6f33a0b3' }
+post /api/users/:_id/exercises req.params=  { _id: '618f7f9f635c83bd6fecc511' }
 Req.body.date:  1990-01-01
 Inputted Date: 1990-01-01T12:00:00.000Z
 Returning:  {
-  _id: '618f5dbee0f85def6f33a0b3',
-  username: 'fcc_test_16367855988',
+  _id: '618f7f9f635c83bd6fecc511',
+  username: 'fcc_test_16367942714',
   description: 'test',
   duration: 60,
   date: 'Mon Jan 01 1990'
@@ -92,22 +92,22 @@ post /api/users/:_id/exercises req.body=  [Object: null prototype] {
   duration: '60',
   date: '1990-01-02'
 }
-post /api/users/:_id/exercises req.params=  { _id: '618f5dbee0f85def6f33a0b3' }
+post /api/users/:_id/exercises req.params=  { _id: '618f7f9f635c83bd6fecc511' }
 Req.body.date:  1990-01-02
 Inputted Date: 1990-01-02T12:00:00.000Z
 Returning:  {
-  _id: '618f5dbee0f85def6f33a0b3',
-  username: 'fcc_test_16367855988',
+  _id: '618f7f9f635c83bd6fecc511',
+  username: 'fcc_test_16367942714',
   description: 'test',
   duration: 60,
   date: 'Tue Jan 02 1990'
 }
 post /api/users/:_id/logs req.body=  {}
-post /api/users/:_id/logs req.params=  { _id: '618f5dbee0f85def6f33a0b3' }
+post /api/users/:_id/logs req.params=  { _id: '618f7f9f635c83bd6fecc511' }
 from:  1989-12-31T00:00:00.000Z to:  1990-01-03T12:00:00.001Z limit:  10000
 Returning : {
-  _id: '618f5dbee0f85def6f33a0b3',
-  username: 'fcc_test_16367855988',
+  _id: '618f7f9f635c83bd6fecc511',
+  username: 'fcc_test_16367942714',
   count: 2,
   log: [
     { description: 'test', duration: 60, date: 'Tue Jan 02 1990' },
@@ -115,11 +115,11 @@ Returning : {
   ]
 }
 post /api/users/:_id/logs req.body=  {}
-post /api/users/:_id/logs req.params=  { _id: '618f5dbee0f85def6f33a0b3' }
-from:  1970-01-01T00:00:00.000Z to:  2021-11-13T06:39:59.449Z limit:  1
+post /api/users/:_id/logs req.params=  { _id: '618f7f9f635c83bd6fecc511' }
+from:  1970-01-01T00:00:00.000Z to:  2021-11-13T12:00:00.001Z limit:  1
 Returning : {
-  _id: '618f5dbee0f85def6f33a0b3',
-  username: 'fcc_test_16367855988',
+  _id: '618f7f9f635c83bd6fecc511',
+  username: 'fcc_test_16367942714',
   count: 1,
   log: [ { description: 'test', duration: 60, date: 'Mon Jan 01 1990' } ]
 }
