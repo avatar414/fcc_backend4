@@ -184,7 +184,7 @@ app.get('/api/users/:_id/logs', async (req, res) => {
       })
     })
     //------------------------------------
-    res.status(200).send({
+    res.status(200).send(new Object({
       _id: uid,
       username: uname,
       count: activities.length,
@@ -194,7 +194,7 @@ app.get('/api/users/:_id/logs', async (req, res) => {
         // limit: limit,
       // end for debugging
       log: factivities
-    });
+    }));
   }
   catch (e) {
     res.status(400).send(e);
