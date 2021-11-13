@@ -2,10 +2,12 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 require('dotenv').config()
+var moment = require('immoment');
 const bodyParser = require('body-parser');
 const { MongoClient } = require('mongodb');
 const mongoose = require('mongoose');
 const validator = require('validator');
+
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -119,7 +121,9 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
       theDate = new Date(Date.now());
       console.log("Default Date: ",theDate)
     } else {      
-      theDate = new Date(Date.parse(req.body.date) + 43200000);
+      // + 43200000
+      theDate= moment(req.body.date, 'YYYY-MM-DD').set({'hour': 12, 'minute': 0}).toDate();
+      //theDate = new Date(Date.parse(req.body.date)).setHours(12);
       console.log("Inputted Date:",theDate)
     }
  
@@ -163,11 +167,12 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     const uname = user.username;
     const uid = req.params._id;
     const from= req.query.from? new Date(Date.parse(req.query.from)): new Date(0);
-    const to= req.query.to? new Date(Date.parse(req.query.to) + 43200001) : new Date(Date.parse(new Date().toDateString()) + 43200001);
+    //const to= req.query.to? new Date(Date.parse(req.query.to).toDateString()).setHours(12) : now.endOf('day'); 
+    const eod=new moment().endOf('day');   
+    const to= req.query.to? new Date(Date.parse(req.query.to).toDateString()).setHours(12) : eod.toISOString();    
     const limit= (typeof(req.query.limit) != 'undefined')? Number(req.query.limit) :  MAX_QUERY_RECS;
-    console.log ("from: ",from,"to: ",to,"limit: ",limit)
+    console.log("To:" ,to);
    
-
     const activities = await Activity.find({ 
       assocId: uid,
       date: {$gte: from, $lte: to}
