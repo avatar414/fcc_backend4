@@ -167,7 +167,7 @@ app.get('/api/users/:_id/logs', async (req, res) => {
 //    const from= req.query.from;
 //    const to= req.query.to;
     const from= req.query.from? new Date(Date.parse(req.query.from)) : new Date(0);
-    const to= req.query.to? new Date(Date.parse(req.query.to)) : new Date();
+    const to= req.query.to? new Date(Date.parse(req.query.to) + 43200001) : new Date();
     const limit= (typeof(req.query.limit) != 'undefined')? Number(req.query.limit) :  MAX_QUERY_RECS;
     console.log ("from: ",from,"to: ",to,"limit: ",limit)
     if((from === NaN) || (to === NaN))

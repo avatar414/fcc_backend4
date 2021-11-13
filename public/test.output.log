@@ -1,0 +1,125 @@
+node v12.16.1
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367831259' }
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367831265' }
+/api/users get
+/api/users get
+/api/users get
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367831269' }
+post /api/users/:_id/exercises req.body=  [Object: null prototype] {
+  description: 'test',
+  duration: '60',
+  date: '1990-01-01'
+}
+post /api/users/:_id/exercises req.params=  { _id: '618f541644558636f4c1c71d' }
+Req.body.date:  1990-01-01
+Inputted Date: 1990-01-01T12:00:00.000Z
+Returning:  {
+  _id: '618f541644558636f4c1c71d',
+  username: 'fcc_test_16367831269',
+  description: 'test',
+  duration: 60,
+  date: 'Mon Jan 01 1990'
+}
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367831272' }
+post /api/users/:_id/exercises req.body=  [Object: null prototype] {
+  description: 'test',
+  duration: '60',
+  date: '1990-01-01'
+}
+post /api/users/:_id/exercises req.params=  { _id: '618f541744558636f4c1c722' }
+Req.body.date:  1990-01-01
+Inputted Date: 1990-01-01T12:00:00.000Z
+Returning:  {
+  _id: '618f541744558636f4c1c722',
+  username: 'fcc_test_16367831272',
+  description: 'test',
+  duration: 60,
+  date: 'Mon Jan 01 1990'
+}
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367831274' }
+post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
+post /api/users/:_id/exercises req.params=  { _id: '618f541744558636f4c1c727' }
+Req.body.date:  undefined
+Inputted Date: Invalid Date
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367831277' }
+post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
+post /api/users/:_id/exercises req.params=  { _id: '618f541744558636f4c1c72b' }
+Req.body.date:  undefined
+Inputted Date: Invalid Date
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367831279' }
+post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
+post /api/users/:_id/exercises req.params=  { _id: '618f541844558636f4c1c72f' }
+Req.body.date:  undefined
+Inputted Date: Invalid Date
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367831282' }
+post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
+post /api/users/:_id/exercises req.params=  { _id: '618f541844558636f4c1c733' }
+Req.body.date:  undefined
+Inputted Date: Invalid Date
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367831285' }
+post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
+post /api/users/:_id/exercises req.params=  { _id: '618f541844558636f4c1c737' }
+Req.body.date:  undefined
+Inputted Date: Invalid Date
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367831288' }
+post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
+post /api/users/:_id/exercises req.params=  { _id: '618f541844558636f4c1c73b' }
+Req.body.date:  undefined
+Inputted Date: Invalid Date
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367831290' }
+post /api/users/:_id/exercises req.body=  [Object: null prototype] { description: 'test', duration: '60' }
+post /api/users/:_id/exercises req.params=  { _id: '618f541944558636f4c1c73f' }
+Req.body.date:  undefined
+Inputted Date: Invalid Date
+post /api/users req.body=  [Object: null prototype] { username: 'fcc_test_16367831293' }
+post /api/users/:_id/exercises req.body=  [Object: null prototype] {
+  description: 'test',
+  duration: '60',
+  date: '1990-01-01'
+}
+post /api/users/:_id/exercises req.params=  { _id: '618f541944558636f4c1c743' }
+Req.body.date:  1990-01-01
+Inputted Date: 1990-01-01T12:00:00.000Z
+Returning:  {
+  _id: '618f541944558636f4c1c743',
+  username: 'fcc_test_16367831293',
+  description: 'test',
+  duration: 60,
+  date: 'Mon Jan 01 1990'
+}
+post /api/users/:_id/exercises req.body=  [Object: null prototype] {
+  description: 'test',
+  duration: '60',
+  date: '1990-01-02'
+}
+post /api/users/:_id/exercises req.params=  { _id: '618f541944558636f4c1c743' }
+Req.body.date:  1990-01-02
+Inputted Date: 1990-01-02T12:00:00.000Z
+Returning:  {
+  _id: '618f541944558636f4c1c743',
+  username: 'fcc_test_16367831293',
+  description: 'test',
+  duration: 60,
+  date: 'Tue Jan 02 1990'
+}
+post /api/users/:_id/logs req.body=  {}
+post /api/users/:_id/logs req.params=  { _id: '618f541944558636f4c1c743' }
+from:  1989-12-31T00:00:00.000Z to:  1990-01-03T00:00:00.000Z limit:  10000
+Returning : {
+  _id: '618f541944558636f4c1c743',
+  username: 'fcc_test_16367831293',
+  count: 2,
+  log: [
+    { description: 'test', duration: 60, date: 'Tue Jan 02 1990' },
+    { description: 'test', duration: 60, date: 'Mon Jan 01 1990' }
+  ]
+}
+post /api/users/:_id/logs req.body=  {}
+post /api/users/:_id/logs req.params=  { _id: '618f541944558636f4c1c743' }
+from:  1970-01-01T00:00:00.000Z to:  2021-11-13T05:58:49.946Z limit:  1
+Returning : {
+  _id: '618f541944558636f4c1c743',
+  username: 'fcc_test_16367831293',
+  count: 1,
+  log: [ { description: 'test', duration: 60, date: 'Mon Jan 01 1990' } ]
+}
