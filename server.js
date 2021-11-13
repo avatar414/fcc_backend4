@@ -120,7 +120,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
       console.log("Default Date: ",theDate)
     } else {
       
-      theDate = new Date(Date.parse(req.body.date) + 43200);
+      theDate = new Date(Date.parse(req.body.date) + 43200000);
       console.log("Inputted Date:",theDate)
     }
 
@@ -132,6 +132,13 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
         description: req.body.description,
         duration: req.body.duration,
         date: theDate
+      });
+      console.log("Returning: ",{
+        _id: uid,
+        username: uname,
+        description: activity.description,
+        duration: activity.duration,
+        date: activity.date.toDateString()
       });
     res.status(200).send({
       _id: uid,
@@ -177,13 +184,26 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     
     factivities = []
     activities.forEach((element) => {
-      factivities.push({
+      factivities.unshift({
         description: element.description,
         duration: element.duration,
         date: element.date.toDateString()
       })
     })
     //------------------------------------
+    console.log( "Returning :",new Object({
+      _id: uid,
+      username: uname,
+      count: activities.length,
+      // for debugging
+        // from: from.toDateString(),
+        // to: to.toDateString(),
+        // limit: limit,
+      // end for debugging
+      log: factivities
+
+    }));
+    
     res.status(200).send(new Object({
       _id: uid,
       username: uname,
