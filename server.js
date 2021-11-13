@@ -2,11 +2,11 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 require('dotenv').config()
-var moment = require('immoment');
 const bodyParser = require('body-parser');
 const { MongoClient } = require('mongodb');
 const mongoose = require('mongoose');
 const validator = require('validator');
+var moment = require('immoment');
 
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -41,7 +41,12 @@ const activitySchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: () => Date.now()
+    default: () => Date.now(),
+    validate(value){
+      const result = moment(value, 'YYYY-MM-DD').isValid();
+      if(result === false)
+      throw new Error('Invalid Date');        
+    }
   },
 
   duration: {
@@ -121,9 +126,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
       theDate = new Date(Date.now());
       console.log("Default Date: ",theDate)
     } else {      
-      // + 43200000
       theDate= moment(req.body.date, 'YYYY-MM-DD').set({'hour': 12, 'minute': 0}).toDate();
-      //theDate = new Date(Date.parse(req.body.date)).setHours(12);
       console.log("Inputted Date:",theDate)
     }
  
