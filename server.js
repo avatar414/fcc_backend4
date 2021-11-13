@@ -122,8 +122,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
       theDate = new Date(Date.parse(req.body.date) + 43200000);
       console.log("Inputted Date:",theDate)
     }
-
-    //const theDate = new Date(Date.now());   
+ 
     const activity = await Activity.create(
       {
         username: uname,
@@ -152,7 +151,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   }
 });
 
-// 61895d112b9b7fa461177a71
+// 618ff265ab3062a0a8fb0f64
 app.get('/api/users/:_id/logs', async (req, res) => {
   console.log("post /api/users/:_id/logs req.body= ", req.body);
   console.log("post /api/users/:_id/logs req.params= ", req.params);
@@ -163,8 +162,6 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     
     const uname = user.username;
     const uid = req.params._id;
-//    const from= req.query.from;
-//    const to= req.query.to;
     const from= req.query.from? new Date(Date.parse(req.query.from)): new Date(0);
     const to= req.query.to? new Date(Date.parse(req.query.to) + 43200001) : new Date(Date.parse(new Date().toDateString()) + 43200001);
     const limit= (typeof(req.query.limit) != 'undefined')? Number(req.query.limit) :  MAX_QUERY_RECS;
@@ -177,8 +174,8 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     }, 'description duration date')
     .limit(limit);
 
-    // This little kludgey bit is here to give me access to manipulate the return values
-    // and order to blindly guess at ambiguous unit tests.
+    // This little kludgey bit is here to give me access to 
+    // manipulate the return values and order
     
     factivities = []
     activities.forEach((element) => {
@@ -190,27 +187,17 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     })
     //------------------------------------
     console.log( "Returning :",new Object({
-      _id: uid,
       username: uname,
       count: activities.length,
-      // for debugging
-        // from: from.toDateString(),
-        // to: to.toDateString(),
-        // limit: limit,
-      // end for debugging
+      _id: uid,
       log: factivities
 
     }));
     
     res.status(200).send(new Object({
-      _id: uid,
       username: uname,
       count: activities.length,
-      // for debugging
-        // from: from.toDateString(),
-        // to: to.toDateString(),
-        // limit: limit,
-      // end for debugging
+      _id: uid,
       log: factivities
     }));
   }
