@@ -45,7 +45,7 @@ const activitySchema = new mongoose.Schema({
     validate(value){
       const result = moment(value, 'YYYY-MM-DD').isValid();
       if(result === false)
-      throw new Error('Invalid Date');        
+      throw new Error("Invalid Date");        
     }
   },
 
@@ -170,11 +170,9 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     const uname = user.username;
     const uid = req.params._id;
     const from= req.query.from? new Date(Date.parse(req.query.from)): new Date(0);
-    //const to= req.query.to? new Date(Date.parse(req.query.to).toDateString()).setHours(12) : now.endOf('day'); 
-    const eod=new moment().endOf('day');   
+    const eod= new moment().endOf('day');   
     const to= req.query.to? new Date(Date.parse(req.query.to).toDateString()).setHours(12) : eod.toISOString();    
     const limit= (typeof(req.query.limit) != 'undefined')? Number(req.query.limit) :  MAX_QUERY_RECS;
-    console.log("To:" ,to);
    
     const activities = await Activity.find({ 
       assocId: uid,
