@@ -42,10 +42,10 @@ const activitySchema = new mongoose.Schema({
   date: {
     type: Date,
     default: () => Date.now(),
-    validate(value){
+    validate(value) {
       const result = moment(value, 'YYYY-MM-DD').isValid();
-      if(result === false)
-      throw new Error("Invalid Date");        
+      if (result === false)
+        throw new Error("Invalid Date");
     }
   },
 
@@ -124,12 +124,12 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     console.log("Req.body.date: ", req.body.date);
     if (req.body.date === "") {
       theDate = new Date(Date.now());
-      console.log("Default Date: ",theDate)
-    } else {      
-      theDate= moment(req.body.date, 'YYYY-MM-DD').set({'hour': 12, 'minute': 0}).toDate();
-      console.log("Inputted Date:",theDate)
+      console.log("Default Date: ", theDate)
+    } else {
+      theDate = moment(req.body.date, 'YYYY-MM-DD').set({ 'hour': 12, 'minute': 0 }).toDate();
+      console.log("Inputted Date:", theDate)
     }
- 
+
     const activity = await Activity.create(
       {
         username: uname,
@@ -138,13 +138,13 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
         duration: req.body.duration,
         date: theDate
       });
-      console.log("Returning: ",{
-        _id: uid,
-        username: uname,
-        description: activity.description,
-        duration: activity.duration,
-        date: activity.date.toDateString()
-      });
+    console.log("Returning: ", {
+      _id: uid,
+      username: uname,
+      description: activity.description,
+      duration: activity.duration,
+      date: activity.date.toDateString()
+    });
     res.status(200).send({
       _id: uid,
       username: uname,
@@ -166,23 +166,26 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     const user = await User.findById({ _id: req.params._id }, 'username',)
     if (!user)
       return res.status(404).send({ error: "Invalid User" })
-    
+
     const uname = user.username;
     const uid = req.params._id;
-    const from= req.query.from? new Date(Date.parse(req.query.from)): new Date(0);
-    const eod= new moment().endOf('day');   
-    const to= req.query.to? new Date(Date.parse(req.query.to).toDateString()).setHours(12) : eod.toISOString();    
-    const limit= (typeof(req.query.limit) != 'undefined')? Number(req.query.limit) :  MAX_QUERY_RECS;
-   
-    const activities = await Activity.find({ 
+    const from = req.query.from ? new Date(moment(req.query.from, 'YYYY-MM-DD').toISOString()) : new Date(0);
+    const eod = new moment().endOf('day');
+    const now = new moment();
+    const to = req.query.to? new Date(moment(req.query.to, 'YYYY-MM-DD').set({'hours' : 23, 'minutes': 59, 'seconds': 59}).toISOString())  : eod.toISOString();
+    // req.query.to ? moment.set({ 'hour': 12, 'minute': 0 }).toDate() 
+    const limit = (typeof (req.query.limit) != 'undefined') ? Number(req.query.limit) : MAX_QUERY_RECS;
+    console.log("from: ", from, "to: ", to);
+
+    const activities = await Activity.find({
       assocId: uid,
-      date: {$gte: from, $lte: to}
+      date: { $gte: from, $lte: to }
     }, 'description duration date')
-    .limit(limit);
+      .limit(limit);
 
     // This little kludgey bit is here to give me access to 
     // manipulate the return values and order
-    
+
     factivities = []
     activities.forEach((element) => {
       factivities.unshift({
@@ -192,14 +195,14 @@ app.get('/api/users/:_id/logs', async (req, res) => {
       })
     })
     //------------------------------------
-    console.log( "Returning :",new Object({
+    console.log("Returning :", new Object({
       username: uname,
       count: activities.length,
       _id: uid,
       log: factivities
 
     }));
-    
+
     res.status(200).send(new Object({
       username: uname,
       count: activities.length,
